@@ -1,0 +1,41 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Karim Semmoud Personal Blog'
+
+[module]
+[[module.imports]]
+  path = 'hugo-theme-nightfall'
+
+[menu]
+  [[menu.header]]
+    name = "posts"
+    weight = 0
+    url = "posts"
+  [[menu.header]]
+    name = "about"
+    weight = 1
+    url = "about"
+
+[params]
+author = "Karim Semmoud"
+user = "karim"
+hostname = "semmoud.com"
+footerHtml = '<a href="https://github.com/karim-semmoud/semmoud-com" class="footerLink">Copy me!</a> I am open source, <a href="https://www.gnu.org/licenses/gpl-3.0.en.html#license-text" class="footerLink">GNU</a> General Public License'
+
+readingTime = false  # Show reading time on post page
+published = true  # Show published data on post page
+
+[[params.social]]
+key = 0
+name = "github"
+url = "https://github.com/karim-semmoud"
+
+[[params.social]]
+key = 1
+name = "linkedin"
+url = "https://www.linkedin.com/in/karim-semmoud/"
+
+[[params.social]]
+key = 2
+name = "email"
+url = "mailto:karim@semmoud.com"

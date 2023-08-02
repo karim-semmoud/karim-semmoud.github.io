@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>
+Phoenix Gettext &amp; Crowdin | Karim Semmoud
+</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="generator" content="Hugo 0.92.2" />
+
+
+<link rel="canonical" href="http://example.org/post/phoenix-gettext-crowdin/" >
+<link href="/sass/main.min.a8be33730f01e46b6e968a84ed6b211a9d1286d34f7e143c012da9c14cd56400.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+    <div class="header">
+        <div>
+            <a href="http://example.org/">
+                <span class="terminal">karim@semmoud.com ~ $</span>
+            </a>
+        </div>
+        <input class="side-menu" type="checkbox" id="side-menu">
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+        <nav class="headerLinks">
+            <ul>
+                
+                <li>
+                    <a href="http://example.org/about" title="" >
+                        ~/about</a>
+                </li>
+                
+                <li>
+                    <a href="http://example.org/posts" title="" >
+                        ~/posts</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <main class="main">
+                
+<div class="postWrapper">
+    <h1>Phoenix Gettext &amp; Crowdin</h1>
+    
+    <section class="postMetadata">
+        <dl>
+            
+                
+<dt>tags</dt>
+<dd><span></span>
+    <a href="/tags/phoenix/">#Phoenix</a><span></span>
+    <a href="/tags/elixir/">#Elixir</a><span></span>
+    <a href="/tags/gettext/">#Gettext</a><span></span>
+    <a href="/tags/crowdin/">#Crowdin</a></dd>
+            
+            
+            
+            
+                <dt>published</dt>
+                
+                <dd><time datetime="2023-08-02">August 2, 2023</time></dd>
+            
+            
+        </dl>
+    </section>
+    
+    <div>
+        <h1 id="phoenixcrowdin">PhoenixCrowdin</h1>
+<p>This reposiory is an example on managed translations using</p>
+<ul>
+<li>Phoenix framework</li>
+<li>Gettext</li>
+<li>Plugs</li>
+<li>Tests</li>
+</ul>
+<h2 id="prerequise">Prerequise</h2>
+<ul>
+<li>Elixir and Phoenix installed</li>
+<li>ASDF</li>
+<li>NPM</li>
+<li>Github Account</li>
+<li>Crowdin Account</li>
+</ul>
+<h2 id="run-locally">Run Locally</h2>
+<pre tabindex="0"><code># Clone this repository
+git clone https://github.com/karim-semmoud/phoenix-crowdin.git
+
+# Enter the project folder 
+cd phoenix-crowdin
+
+# install Erlang and Elixir correct versions 
+asdf install
+
+# install and setup dependencies
+mix deps.get
+
+# install Flowbite
+cd assets
+npm install
+
+# run tests
+mix test
+
+# Start Phoenix endpoint with
+mix phx.server
+# or inside IEx with 
+iex -S mix phx.server
+
+
+</code></pre><p>Now you can visit <a href="http://localhost:4000"><code>localhost:4000</code></a> from your browser.
+You can use the language switch on the top right or visit
+<a href="http://localhost:4000/?locale=fr"><code>localhost:4000/?locale=fr</code></a></p>
+<p>The logic is as follow</p>
+<p>Default language is English en
+Additional language is French fr</p>
+<ul>
+<li>If URL parameter (?locale=fr)exist and is valid, use it</li>
+<li>Else application language cookie exist use this language</li>
+<li>Else if browser language exist use this language</li>
+<li>Else use default language</li>
+</ul>
+<h2 id="connect-your-crowdin-project">Connect your Crowdin project</h2>
+<h2 id="feeling-like-doing-it-from-scratch-">Feeling like doing it from scratch ?</h2>
+<h3 id="create-phoenix-app">Create Phoenix app</h3>
+<pre tabindex="0"><code>mix phx.new phoenix-crowdin
+
+#Oups ... So we could use mix phx.new phoenix_crowdin but lets be honest, who use underscores in github repository names ? Lets fix that
+
+mix phx.new phoenix-crowdin --app phoenix_crowdin
+
+#The folder name will be phoenix-crowdin andt the app PhenixCrowdin
+
+</code></pre><p>That is great we have our Phoenix app setup</p>
+<p>Before anything else lets create our <code>tools-versions</code></p>
+<pre tabindex="0"><code>#Setup tools.versions copy the result
+asdf install
+
+#Create new file
+sudo nano .tool-versions
+
+#Paste your versions here
+elixir 1.15.2-otp-26
+erlang 26.0.2
+nodejs 20.4.0
+
+</code></pre><p>Lets create our Github reposotory</p>
+<pre tabindex="0"><code>git init
+git commit
+git remote add origin git@github.com:username/phoenix-crowdin
+git push -u origin master
+</code></pre><p>Start app</p>
+<pre tabindex="0"><code>mix phx.server
+</code></pre><h3 id="setup-gettext">Setup Gettext</h3>
+<p>For more details see [[Phoenix Framework Tips for beginners]] for more details</p>
+<pre tabindex="0"><code>
+  
+
+mix gettext.extract
+
+# Create other languages
+
+mix gettext.merge priv/gettext --locale fr
+
+mix gettext.merge priv/gettext --locale ar
+
+  
+
+#Merge all lang
+
+mix gettext.merge priv/gettext
+
+</code></pre><p>Setup Crowdin</p>
+<p>Create an account at ( only one free private project but as many public projects )</p>
+<p>Go to Integration and search for Github</p>
+<p>Select your github repo, your master branch and click on the edit button next to the &quot; Service branch&quot;</p>
+<p>As a source file path enter</p>
+<p><code>/priv/gettext/en/LC_MESSAGES/*.po</code></p>
+<p>As a translated path</p>
+<p><code>/priv/gettext/%two_letters_code%/LC_MESSAGES/%original_file_name%</code></p>
+<p>The syntax is important and you can verify visually the folders on the right</p>
+<p>Click save</p>
+<p>Push Options</p>
+<p>For testing purpose you can enable this options. It will create pull request each time there are new translations. However is a real life scenario it would create way too many pull request and would probably not fit the translation workflow. For example you may wish to wait until the language is translated a 100% before creating a pull request</p>
+<p>Crowdin will automatically add a crowdin.yml confi file to your repo.</p>
+<p>You should pull the new file to your machine</p>
+<pre tabindex="0"><code>
+files:
+
+- source: /priv/gettext/en/LC_MESSAGES/*.po
+
+translation: /priv/gettext/%two_letters_code%/LC_MESSAGES/%original_file_name%
+
+</code></pre><p>Let make some translations</p>
+<p>Got go to Crowdin Translation select french and default</p>
+<p>Translate the 2 strings ( actions is the same)</p>
+<p>You can make more translations to the error file also</p>
+<p>Once saved</p>
+<p>It create also a pull request</p>
+<p>Lets now create some new string</p>
+<p>Open <code>lib/phoenix_crowdin_web/controllers/page_html/home.html.heex</code></p>
+<p>and modify <code>Phoenix Framework</code> by</p>
+<pre tabindex="0"><code>
+&lt;%= gettext(&quot;Phoenix Framework&quot;) %&gt;
+
+</code></pre><p>By default this string will be save in default.po file.</p>
+<p>To save it in errors file use</p>
+<pre tabindex="0"><code>
+&lt;%= dgettext(&quot;errors&quot;, &quot;Phoenix Framework&quot;) %&gt;
+
+</code></pre><p>Lets replace all the texts on the page</p>
+<p>We then run</p>
+<pre tabindex="0"><code>
+mix gettext.extract
+
+#Compiling 15 files (.ex)
+
+#Extracted priv/gettext/default.pot
+
+  
+
+mix gettext.merge priv/gettext
+
+#Wrote priv/gettext/en/LC_MESSAGES/default.po (11 new messages, 0 removed, 2 #unchanged, 0 reworded (fuzzy), 0 marked as obsolete)
+
+#Wrote priv/gettext/en/LC_MESSAGES/errors.po (0 new messages, 0 removed, 24 #unchanged, 0 reworded (fuzzy), 0 marked as obsolete)
+
+#Wrote priv/gettext/fr/LC_MESSAGES/errors.po (0 new messages, 0 removed, 24 #unchanged, 0 reworded (fuzzy), 0 marked as obsolete)
+
+#Wrote priv/gettext/fr/LC_MESSAGES/default.po (11 new messages, 0 removed, 2 # # #unchanged, 0 reworded (fuzzy), 0 marked as obsolete)
+
+  
+
+</code></pre><p>Let commit our changes to GitHub</p>
+<p>Crowdin automatically check for new commits and update on <code>priv/gettext</code> files</p>
+<h3 id="language-switch">Language Switch</h3>
+<h4 id="locale-plug">Locale Plug</h4>
+<p>This Plug uses the following ressources</p>
+<p><a href="https://github.com/smeevil/set_locale/tree/master">https://github.com/smeevil/set_locale/tree/master</a></p>
+<p><a href="https://phrase.com/blog/posts/set-and-manage-locale-data-in-your-phoenix-l10n-project/">https://phrase.com/blog/posts/set-and-manage-locale-data-in-your-phoenix-l10n-project/</a></p>
+<h4 id="flowbite-dropdown">Flowbite Dropdown</h4>
+<p>Follow this guide in order to add Flowbite CSS and JS</p>
+<p><a href="https://flowbite.com/docs/getting-started/phoenix/">https://flowbite.com/docs/getting-started/phoenix/</a></p>
+<h2 id="learn-more">Learn more</h2>
+<ul>
+<li>
+<p>Official website: <a href="https://www.phoenixframework.org/">https://www.phoenixframework.org/</a></p>
+</li>
+<li>
+<p>Guides: <a href="https://hexdocs.pm/phoenix/overview.html">https://hexdocs.pm/phoenix/overview.html</a></p>
+</li>
+<li>
+<p>Docs: <a href="https://hexdocs.pm/phoenix">https://hexdocs.pm/phoenix</a></p>
+</li>
+<li>
+<p>Forum: <a href="https://elixirforum.com/c/phoenix-forum">https://elixirforum.com/c/phoenix-forum</a></p>
+</li>
+<li>
+<p>Source: <a href="https://github.com/phoenixframework/phoenix">https://github.com/phoenixframework/phoenix</a></p>
+</li>
+</ul>
+
+    </div>
+</div>
+
+            </main>
+        </div>
+
+
+        <footer class="footer">
+    
+        <span><a href="https://github.com/karim-semmoud/semmoud-com" class="footerLink">Copy me!</a> I am open source, <a href="https://www.gnu.org/licenses/gpl-3.0.en.html#license-text" class="footerLink">GNU</a> General Public License</span>
+    
+</footer>
+    </div>
+
+</body>
+
+</html>

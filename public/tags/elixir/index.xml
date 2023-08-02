@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elixir on Karim Semmoud Personal Blog</title>
+    <link>http://example.org/tags/elixir/</link>
+    <description>Recent content in Elixir on Karim Semmoud Personal Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://example.org/tags/elixir/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Phoenix Gettext &amp; Crowdin</title>
+      <link>http://example.org/post/phoenix-gettext-crowdin/</link>
+      <pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/post/phoenix-gettext-crowdin/</guid>
+      <description>PhoenixCrowdin This reposiory is an example on managed translations using
+ Phoenix framework Gettext Plugs Tests  Prerequise  Elixir and Phoenix installed ASDF NPM Github Account Crowdin Account  Run Locally # Clone this repository git clone https://github.com/karim-semmoud/phoenix-crowdin.git # Enter the project folder cd phoenix-crowdin # install Erlang and Elixir correct versions asdf install # install and setup dependencies mix deps.get # install Flowbite cd assets npm install # run tests mix test # Start Phoenix endpoint with mix phx.</description>
+    </item>
+    
+  </channel>
+</rss>
