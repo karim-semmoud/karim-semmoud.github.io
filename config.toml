@@ -1,7 +1,7 @@
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
 title = 'Karim Semmoud Personal Blog'
-
+theme = 'hugo-theme-nightfall'
 [module]
 [[module.imports]]
   path = 'hugo-theme-nightfall'
