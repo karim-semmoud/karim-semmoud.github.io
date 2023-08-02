@@ -3,10 +3,6 @@ languageCode = 'en-us'
 title = 'Karim Semmoud Personal Blog'
 theme = "nightfall"
 
-[module]
-[[module.imports]]
-  path = 'nightfall'
-
 [menu]
   [[menu.header]]
     name = "posts"
