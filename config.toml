@@ -4,7 +4,7 @@ title = 'Karim Semmoud Personal Blog'
 
 [module]
 [[module.imports]]
-  path = 'https://github.com/LordMathis/hugo-theme-nightfall.git hugo-theme-nightfall'
+  path = 'hugo-theme-nightfall'
 
 [menu]
   [[menu.header]]
